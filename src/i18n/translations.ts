@@ -2,7 +2,12 @@ export const translations = {
   en: {
     nav: {
       brand: "Belal",
-      domain: ".dev"
+      domain: ".dev",
+      about: "About",
+      projects: "Projects",
+      skills: "Skills",
+      contact: "Contact",
+      cv: "Download CV"
     },
     hero: {
       status: "System Online //",
@@ -84,7 +89,12 @@ export const translations = {
   ar: {
     nav: {
       brand: "بلال",
-      domain: ".مطور"
+      domain: ".مطور",
+      about: "نبذة عني",
+      projects: "المشاريع",
+      skills: "المهارات",
+      contact: "اتصل بي",
+      cv: "تحميل السيرة الذاتية"
     },
     hero: {
       status: "// النظام متصل",

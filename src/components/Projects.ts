@@ -1,9 +1,103 @@
 export class ProjectsInteraction {
     private cards: NodeListOf<HTMLElement>;
+    private modal: HTMLElement | null;
+    private modalContent: HTMLElement | null;
+    private closeBtn: HTMLElement | null;
+    private overlay: HTMLElement | null;
 
     constructor() {
         this.cards = document.querySelectorAll('.project-card');
+        this.modal = document.getElementById('project-modal');
+        this.modalContent = document.getElementById('modal-content');
+        this.closeBtn = document.getElementById('modal-close-btn');
+        this.overlay = document.getElementById('modal-close-overlay');
+        
         this.initTiltEffect();
+        this.initModalLogic();
+    }
+
+    private initModalLogic() {
+        if (!this.modal || !this.modalContent) return;
+
+        // Open Modal
+        this.cards.forEach(card => {
+            const btn = card.querySelector('.open-modal-btn');
+            btn?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.openModal(card);
+            });
+            // Also open on card click (excluding external links)
+            card.addEventListener('click', (e) => {
+                const target = e.target as HTMLElement;
+                if (!target.closest('a') && !target.closest('button')) {
+                    this.openModal(card);
+                }
+            });
+        });
+
+        // Close Modal
+        this.closeBtn?.addEventListener('click', () => this.closeModal());
+        this.overlay?.addEventListener('click', () => this.closeModal());
+        
+        // Escape key close
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !this.modal?.classList.contains('hidden')) {
+                this.closeModal();
+            }
+        });
+    }
+
+    private openModal(card: HTMLElement) {
+        if (!this.modal || !this.modalContent) return;
+
+        const data = {
+            title: card.getAttribute('data-full-title'),
+            desc: card.getAttribute('data-full-desc'),
+            stack: card.getAttribute('data-stack'),
+            github: card.getAttribute('data-github'),
+            live: card.getAttribute('data-live'),
+            img: card.querySelector('img')?.src
+        };
+
+        const mTitle = document.getElementById('modal-title');
+        const mDesc = document.getElementById('modal-desc');
+        const mStack = document.getElementById('modal-stack');
+        const mGithub = document.getElementById('modal-github') as HTMLAnchorElement;
+        const mLive = document.getElementById('modal-live') as HTMLAnchorElement;
+        const mImage = document.getElementById('modal-image') as HTMLImageElement;
+
+        if (mTitle) mTitle.innerText = data.title || "";
+        if (mDesc) mDesc.innerText = data.desc || "";
+        if (mImage && data.img) mImage.src = data.img;
+        if (mGithub) mGithub.href = data.github || "#";
+        if (mLive) mLive.href = data.live || "#";
+
+        if (mStack && data.stack) {
+            mStack.innerHTML = data.stack.split(',').map(s => `
+                <span class="text-[10px] uppercase font-bold tracking-wider text-electricBlue bg-electricBlue/10 px-3 py-1 rounded-full border border-electricBlue/20">
+                    ${s.trim()}
+                </span>
+            `).join('');
+        }
+
+        // Show modal with animation
+        this.modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        
+        setTimeout(() => {
+            this.modalContent?.classList.remove('translate-y-10', 'opacity-0');
+            this.modalContent?.classList.add('translate-y-0', 'opacity-100');
+        }, 10);
+    }
+
+    private closeModal() {
+        this.modalContent?.classList.add('translate-y-10', 'opacity-0');
+        this.modalContent?.classList.remove('translate-y-0', 'opacity-100');
+        
+        setTimeout(() => {
+            this.modal?.classList.add('hidden');
+            document.body.style.overflow = '';
+        }, 500);
     }
 
     private initTiltEffect() {
@@ -13,16 +107,26 @@ export class ProjectsInteraction {
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
 
-                const multiplier = 20;
+                const multiplier = 10;
                 
                 const xCalc = (x - rect.width / 2) / rect.width * multiplier;
                 const yCalc = -(y - rect.height / 2) / rect.height * multiplier;
 
-                card.style.transform = `perspective(1000px) rotateX(${yCalc}deg) rotateY(${xCalc}deg) scale3d(1.05, 1.05, 1.05)`;
+                card.style.transform = `perspective(2000px) rotateX(${yCalc}deg) rotateY(${xCalc}deg) scale3d(1.02, 1.02, 1.02)`;
+                
+                // Parallax effect for image
+                const img = card.querySelector('img');
+                if (img) {
+                    img.style.transform = `scale(1.1) translate(${-xCalc}px, ${-yCalc}px)`;
+                }
             });
 
             card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                card.style.transform = 'perspective(2000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                const img = card.querySelector('img');
+                if (img) {
+                    img.style.transform = 'scale(1) translate(0, 0)';
+                }
             });
         });
     }

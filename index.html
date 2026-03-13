@@ -19,20 +19,72 @@
     </div>
 
     <!-- Navigation / Header -->
-    <header class="fixed top-0 w-full z-40 px-6 py-4 glass-panel !rounded-none !border-t-0 !border-l-0 !border-r-0 flex justify-between items-center transition-transform transform translate-y-0" id="navbar">
+    <!-- Navigation / Header -->
+    <header class="fixed top-0 w-full z-40 px-6 py-4 glass-panel !rounded-none !border-t-0 !border-l-0 !border-r-0 flex justify-between items-center transition-all duration-300" id="navbar">
+      <!-- Left side: Brand -->
       <div class="font-['Outfit'] font-bold text-2xl tracking-tighter cursor-pointer group flex translate-y-[2px]">
         <span class="text-textPrimary group-hover:text-electricBlue transition-colors" data-i18n="nav.brand">Belal</span><span class="text-electricBlue dark:group-hover:text-textPrimary group-hover:text-textPrimary transition-colors" data-i18n="nav.domain">.dev</span>
       </div>
-      <div class="flex items-center gap-6">
-        <button id="lang-toggle" class="px-3 py-1 font-bold text-sm border-2 border-electricBlue/50 text-electricBlue rounded-full hover:bg-electricBlue hover:text-white transition-colors" aria-label="Toggle Language">
-           <span id="lang-label">AR</span>
-        </button>
-        <button id="theme-toggle" class="p-2 rounded-full hover:bg-black/10 dark:hover:bg-white/10 transition-colors" aria-label="Toggle Dark/Light Mode">
-          <!-- Icon injected by JS -->
-          <i id="theme-icon" data-lucide="sun" class="w-5 h-5 text-iconColor"></i>
+
+      <!-- Center: Navigation Links (Desktop) -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="#about" class="nav-link relative text-sm font-semibold text-textSecondary hover:text-textPrimary transition-colors py-1" data-i18n="nav.about">About</a>
+        <a href="#projects" class="nav-link relative text-sm font-semibold text-textSecondary hover:text-textPrimary transition-colors py-1" data-i18n="nav.projects">Projects</a>
+        <a href="#stack" class="nav-link relative text-sm font-semibold text-textSecondary hover:text-textPrimary transition-colors py-1" data-i18n="nav.skills">Skills</a>
+        <a href="#contact" class="nav-link relative text-sm font-semibold text-textSecondary hover:text-textPrimary transition-colors py-1" data-i18n="nav.contact">Contact</a>
+      </nav>
+
+      <!-- Right side: Actions -->
+      <div class="flex items-center gap-4">
+        <a href="/Belal_Awadallah_CV.pdf" download target="_blank" class="hidden md:flex items-center gap-2 px-5 py-2 border border-electricBlue/50 text-textPrimary text-sm font-bold rounded-full hover:bg-electricBlue hover:text-white hover:shadow-[0_0_15px_rgba(10,132,255,0.3)] transition-all group" id="download-cv-nav">
+          <i data-lucide="download" class="w-4 h-4 text-neonCyan group-hover:text-white transition-colors"></i>
+          <span data-i18n="nav.cv">Download CV</span>
+        </a>
+
+        <div class="flex items-center gap-4">
+          <button id="lang-toggle" class="px-3 py-1 font-bold text-sm border-2 border-electricBlue/50 text-electricBlue rounded-full hover:bg-electricBlue hover:text-white transition-colors" aria-label="Toggle Language">
+             <span id="lang-label">AR</span>
+          </button>
+          <button id="theme-toggle" class="p-2 rounded-full hover:bg-black/10 dark:hover:bg-white/10 transition-colors" aria-label="Toggle Dark/Light Mode">
+            <i id="theme-icon" data-lucide="sun" class="w-5 h-5 text-iconColor"></i>
+          </button>
+        </div>
+
+        <button id="mobile-menu-toggle" class="md:hidden p-2 text-textPrimary" aria-label="Toggle Mobile Menu">
+          <i data-lucide="menu" class="w-6 h-6"></i>
         </button>
       </div>
+
+      <!-- Scroll Progress Bar -->
+      <div class="absolute bottom-0 left-0 h-[0.5px] md:h-[2px] bg-electricBlue w-0 transition-all duration-100" id="scroll-progress"></div>
     </header>
+
+    <!-- Mobile Menu Overlay -->
+    <aside id="mobile-menu" class="fixed inset-0 z-50 transform translate-x-full transition-transform duration-300 pointer-events-none md:hidden">
+      <div class="absolute inset-0 bg-black/50 backdrop-blur-sm pointer-events-auto" id="mobile-menu-close"></div>
+      <div class="absolute inset-y-0 right-0 w-3/4 max-w-sm bg-bgPrimary shadow-2xl pointer-events-auto flex flex-col p-8 glass-panel !rounded-none !border-y-0 !border-r-0">
+        <div class="flex justify-between items-center mb-12">
+          <div class="font-['Outfit'] font-bold text-2xl tracking-tighter">
+            <span class="text-textPrimary">Belal</span><span class="text-electricBlue">.dev</span>
+          </div>
+          <button id="mobile-menu-close-btn" class="p-2 text-textPrimary">
+            <i data-lucide="x" class="w-6 h-6"></i>
+          </button>
+        </div>
+        <nav class="flex flex-col gap-6">
+          <a href="#about" class="mobile-nav-link text-2xl font-bold text-textPrimary py-2 border-b border-borderColor/50" data-i18n="nav.about">About</a>
+          <a href="#projects" class="mobile-nav-link text-2xl font-bold text-textPrimary py-2 border-b border-borderColor/50" data-i18n="nav.projects">Projects</a>
+          <a href="#stack" class="mobile-nav-link text-2xl font-bold text-textPrimary py-2 border-b border-borderColor/50" data-i18n="nav.skills">Skills</a>
+          <a href="#contact" class="mobile-nav-link text-2xl font-bold text-textPrimary py-2 border-b border-borderColor/50" data-i18n="nav.contact">Contact</a>
+        </nav>
+        <div class="mt-auto pt-8">
+          <a href="/Belal_Awadallah_CV.pdf" download target="_blank" class="flex items-center justify-center gap-3 w-full py-4 border border-electricBlue text-textPrimary font-bold rounded-xl hover:bg-electricBlue hover:text-white transition-all shadow-[0_0_15px_rgba(10,132,255,0.2)]">
+            <i data-lucide="download" class="w-5 h-5"></i>
+            <span data-i18n="nav.cv">Download CV</span>
+          </a>
+        </div>
+      </div>
+    </aside>
 
     <!-- Main Content Container -->
     <main id="app" class="relative z-10 w-full flex flex-col items-center">
@@ -106,18 +158,90 @@
         </div>
       </section>
 
-      <!-- Tech Stack Visualization -->
-      <section id="stack" class="w-full min-h-screen py-20 px-4 flex flex-col items-center relative z-10">
-        <h2 class="text-4xl md:text-6xl font-['Outfit'] font-black text-center mb-16">
-          <span class="text-gradient" data-i18n="stack.title">Tech Core</span>
+      <!-- Advanced Skills Matrix -->
+      <section id="stack" class="w-full py-20 px-4 md:px-20 mx-auto max-w-7xl relative">
+        <h2 class="text-4xl md:text-5xl font-['Outfit'] font-bold text-center mb-16 flex items-center justify-center gap-4 text-textPrimary">
+           <i data-lucide="layers" class="text-electricBlue w-10 h-10"></i> <span class="text-gradient" data-i18n="stack.title">Tech Stack Matrix</span>
         </h2>
-        <div class="relative w-full max-w-4xl h-[600px] flex items-center justify-center pointer-events-none" id="orbit-container">
-          <!-- Central Item -->
-          <div class="absolute z-20 w-24 h-24 rounded-full bg-black border border-electricBlue shadow-[0_0_30px_#0A84FF] flex items-center justify-center glass-panel pointer-events-auto cursor-pointer hover:scale-110 transition-transform">
-            <span class="font-bold text-xl text-white">Angular</span>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Category 1: Core Dev -->
+          <div class="glass-panel p-8 group hover:bg-electricBlue/5 transition-all duration-300 transform hover:-translate-y-2">
+            <div class="w-12 h-12 rounded-xl bg-electricBlue/10 flex items-center justify-center text-electricBlue mb-6 group-hover:bg-electricBlue group-hover:text-white transition-all">
+              <i data-lucide="code-2" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-2xl font-bold font-['Outfit'] mb-4 text-textPrimary" data-i18n="stack.core.title">Core Development</h3>
+            <ul class="space-y-3">
+              <li class="flex items-center gap-3 text-textSecondary">
+                <div class="w-1.5 h-1.5 rounded-full bg-electricBlue"></div>
+                <span>Angular (v14-18)</span>
+              </li>
+              <li class="flex items-center gap-3 text-textSecondary">
+                <div class="w-1.5 h-1.5 rounded-full bg-electricBlue"></div>
+                <span>TypeScript / JavaScript (ES6+)</span>
+              </li>
+              <li class="flex items-center gap-3 text-textSecondary">
+                <div class="w-1.5 h-1.5 rounded-full bg-electricBlue"></div>
+                <span>Java & C++ Core</span>
+              </li>
+              <li class="flex items-center gap-3 text-textSecondary">
+                <div class="w-1.5 h-1.5 rounded-full bg-electricBlue"></div>
+                <span>RESTful API Integration</span>
+              </li>
+            </ul>
           </div>
-          
-          <!-- Orbit paths are injected by JS along with orbiting tech items -->
+
+          <!-- Category 2: Tools & Backend -->
+          <div class="glass-panel p-8 group hover:bg-cyberPurple/5 transition-all duration-300 transform hover:-translate-y-2">
+            <div class="w-12 h-12 rounded-xl bg-cyberPurple/10 flex items-center justify-center text-cyberPurple mb-6 group-hover:bg-cyberPurple group-hover:text-white transition-all">
+              <i data-lucide="database" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-2xl font-bold font-['Outfit'] mb-4 text-textPrimary" data-i18n="stack.backend.title">Infrastructure & Tools</h3>
+            <ul class="space-y-3">
+              <li class="flex items-center gap-3 text-textSecondary">
+                <div class="w-1.5 h-1.5 rounded-full bg-cyberPurple"></div>
+                <span>Git & GitHub Workflows</span>
+              </li>
+              <li class="flex items-center gap-3 text-textSecondary">
+                <div class="w-1.5 h-1.5 rounded-full bg-cyberPurple"></div>
+                <span>Node.js & Express</span>
+              </li>
+              <li class="flex items-center gap-3 text-textSecondary">
+                <div class="w-1.5 h-1.5 rounded-full bg-cyberPurple"></div>
+                <span>SQL Server / Firebase</span>
+              </li>
+              <li class="flex items-center gap-3 text-textSecondary">
+                <div class="w-1.5 h-1.5 rounded-full bg-cyberPurple"></div>
+                <span>Terminal & Sudo-level Unix</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Category 3: Design & UI -->
+          <div class="glass-panel p-8 group hover:bg-neonCyan/5 transition-all duration-300 transform hover:-translate-y-2">
+            <div class="w-12 h-12 rounded-xl bg-neonCyan/10 flex items-center justify-center text-neonCyan mb-6 group-hover:bg-neonCyan group-hover:text-white transition-all">
+              <i data-lucide="palette" class="w-6 h-6"></i>
+            </div>
+            <h3 class="text-2xl font-bold font-['Outfit'] mb-4 text-textPrimary" data-i18n="stack.uiux.title">UI/UX & Design</h3>
+            <ul class="space-y-3">
+              <li class="flex items-center gap-3 text-textSecondary">
+                <div class="w-1.5 h-1.5 rounded-full bg-neonCyan"></div>
+                <span>Tailwind CSS & SCSS</span>
+              </li>
+              <li class="flex items-center gap-3 text-textSecondary">
+                <div class="w-1.5 h-1.5 rounded-full bg-neonCyan"></div>
+                <span>Figma to Code</span>
+              </li>
+              <li class="flex items-center gap-3 text-textSecondary">
+                <div class="w-1.5 h-1.5 rounded-full bg-neonCyan"></div>
+                <span>Responsive Design Systems</span>
+              </li>
+              <li class="flex items-center gap-3 text-textSecondary">
+                <div class="w-1.5 h-1.5 rounded-full bg-neonCyan"></div>
+                <span>Three.js Animations</span>
+              </li>
+            </ul>
+          </div>
         </div>
       </section>
 
@@ -130,99 +254,183 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 perspective-1000">
           
           <!-- Project 1 -->
-          <div class="project-card relative w-full h-[400px] glass-panel rounded-2xl overflow-hidden cursor-pointer group transform-style-3d bg-white/50 dark:bg-black/20">
-            <div class="absolute inset-0 bg-gradient-to-br from-electricBlue/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
-            <div class="relative z-10 p-6 h-full flex flex-col justify-between">
+          <div class="project-card relative w-full h-[520px] glass-panel rounded-2xl overflow-hidden cursor-pointer group transform-style-3d bg-white/50 dark:bg-black/20 border-borderColor transition-all duration-500 hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_20px_50px_rgba(10,132,255,0.2)]"
+               data-project-id="1"
+               data-full-title="Advanced E-Commerce Ecosystem"
+               data-full-desc="A comprehensive B2C platform featuring real-time inventory management, secure Stripe integration, and an administrative dashboard. Built with scalability in mind, using Angular's reactive patterns."
+               data-stack="Angular, RxJS, Node.js, Stripe, Firebase"
+               data-github="#"
+               data-live="#">
+            <div class="h-1/2 relative overflow-hidden">
+               <img src="https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=1200" alt="E-Commerce Platform" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+               <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+            <div class="relative z-10 p-6 h-1/2 flex flex-col justify-between">
               <div>
-                <div class="flex justify-between items-start mb-4">
-                  <i data-lucide="shopping-cart" class="text-neonCyan w-8 h-8"></i>
-                  <a href="#" class="text-textSecondary hover:text-textPrimary transition-colors"><i data-lucide="github" class="w-6 h-6"></i></a>
+                <div class="flex justify-between items-start mb-2">
+                  <h3 class="text-xl font-bold font-['Outfit'] text-textPrimary" data-i18n="projects.project1.title">E-Commerce Platform</h3>
+                  <i data-lucide="shopping-cart" class="text-electricBlue w-5 h-5"></i>
                 </div>
-                <h3 class="text-2xl font-bold font-['Outfit'] mb-2 text-textPrimary" data-i18n="projects.project1.title">E-Commerce Platform</h3>
-                <p class="text-textSecondary text-sm mb-4 line-clamp-3" data-i18n="projects.project1.desc">Full-featured online store built using Angular and Tailwind CSS with product listings, shopping cart system, authentication, and checkout.</p>
-                <div class="flex flex-wrap gap-2 mt-4">
-                  <span class="text-xs font-mono text-electricBlue bg-electricBlue/10 px-2 py-1 rounded ltr">Angular</span>
-                  <span class="text-xs font-mono text-neonCyan bg-neonCyan/10 px-2 py-1 rounded ltr">Tailwind</span>
+                <p class="text-textSecondary text-sm mb-4 line-clamp-2" data-i18n="projects.project1.desc">Full-featured online store built using Angular and Tailwind CSS with product listings, shopping cart system, authentication, and checkout.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span class="text-[10px] uppercase font-bold tracking-wider text-electricBlue bg-electricBlue/10 px-2 py-0.5 rounded-full border border-electricBlue/20">Angular</span>
+                  <span class="text-[10px] uppercase font-bold tracking-wider text-neonCyan bg-neonCyan/10 px-2 py-0.5 rounded-full border border-neonCyan/20">Tailwind</span>
+                  <span class="text-[10px] uppercase font-bold tracking-wider text-cyberPurple bg-cyberPurple/10 px-2 py-0.5 rounded-full border border-cyberPurple/20">Firebase</span>
                 </div>
               </div>
-              <button class="w-full mt-4 py-2 border border-borderColor text-textPrimary rounded hover:bg-bgPrimary/10 transition-colors uppercase text-xs font-bold tracking-widest flex items-center justify-center gap-2" data-i18n="projects.liveDemo">Live Demo <i data-lucide="external-link" class="w-4 h-4 rtl:mr-2"></i></button>
+              <div class="flex gap-2">
+                <button class="open-modal-btn flex-1 py-2 bg-electricBlue/10 border border-electricBlue/30 text-electricBlue rounded-lg hover:bg-electricBlue hover:text-white transition-all text-xs font-bold" data-i18n="projects.viewDetails">View Details</button>
+                <a href="#" target="_blank" class="p-2 bg-bgPrimary/50 border border-borderColor text-textPrimary rounded-lg hover:bg-white dark:hover:bg-white/10 transition-all flex items-center justify-center">
+                  <i data-lucide="external-link" class="w-4 h-4"></i>
+                </a>
+              </div>
             </div>
           </div>
 
           <!-- Project 2 -->
-          <div class="project-card relative w-full h-[400px] glass-panel rounded-2xl overflow-hidden cursor-pointer group transform-style-3d bg-white/50 dark:bg-black/20">
-            <div class="absolute inset-0 bg-gradient-to-br from-cyberPurple/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
-            <div class="relative z-10 p-6 h-full flex flex-col justify-between">
+          <div class="project-card relative w-full h-[520px] glass-panel rounded-2xl overflow-hidden cursor-pointer group transform-style-3d bg-white/50 dark:bg-black/20 border-borderColor transition-all duration-500 hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_20px_50px_rgba(191,90,242,0.2)]"
+               data-project-id="2"
+               data-full-title="Hyper-Local Weather Forecast"
+               data-full-desc="A real-time weather analytics application that uses OpenWeatherMap API and Leaflet.js for interactive maps. Features include hourly forecasts, UV alerts, and dynamic background changes."
+               data-stack="JavaScript, REST APIs, Leaflet.js, SCSS"
+               data-github="#"
+               data-live="#">
+            <div class="h-1/2 relative overflow-hidden">
+               <img src="https://images.unsplash.com/photo-1592210454359-9043f067919b?auto=format&fit=crop&q=80&w=1200" alt="Weather Forecast App" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+               <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+            <div class="relative z-10 p-6 h-1/2 flex flex-col justify-between">
               <div>
-                <div class="flex justify-between items-start mb-4">
-                  <i data-lucide="cloud-sun" class="text-cyberPurple w-8 h-8"></i>
-                  <a href="#" class="text-textSecondary hover:text-textPrimary transition-colors"><i data-lucide="github" class="w-6 h-6"></i></a>
+                <div class="flex justify-between items-start mb-2">
+                  <h3 class="text-xl font-bold font-['Outfit'] text-textPrimary" data-i18n="projects.project2.title">Weather Forecast App</h3>
+                  <i data-lucide="cloud-sun" class="text-cyberPurple w-5 h-5"></i>
                 </div>
-                <h3 class="text-2xl font-bold font-['Outfit'] mb-2 text-textPrimary" data-i18n="projects.project2.title">Weather Forecast App</h3>
-                <p class="text-textSecondary text-sm mb-4 line-clamp-3" data-i18n="projects.project2.desc">Real-time weather forecasting application using JavaScript and external REST APIs with a dynamic responsive UI.</p>
-                <div class="flex flex-wrap gap-2 mt-4">
-                  <span class="text-xs font-mono text-electricBlue bg-electricBlue/10 px-2 py-1 rounded ltr">JavaScript</span>
-                  <span class="text-xs font-mono text-cyberPurple bg-cyberPurple/10 px-2 py-1 rounded ltr">REST API</span>
+                <p class="text-textSecondary text-sm mb-4 line-clamp-2" data-i18n="projects.project2.desc">Real-time weather forecasting application using JavaScript and external REST APIs with a dynamic responsive UI.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span class="text-[10px] uppercase font-bold tracking-wider text-electricBlue bg-electricBlue/10 px-2 py-0.5 rounded-full border border-electricBlue/20">JavaScript</span>
+                  <span class="text-[10px] uppercase font-bold tracking-wider text-cyberPurple bg-cyberPurple/10 px-2 py-0.5 rounded-full border border-cyberPurple/20">REST API</span>
+                  <span class="text-[10px] uppercase font-bold tracking-wider text-orange-400 bg-orange-400/10 px-2 py-0.5 rounded-full border border-orange-400/20">Leaflet JS</span>
                 </div>
               </div>
-              <button class="w-full mt-4 py-2 border border-borderColor text-textPrimary rounded hover:bg-bgPrimary/10 transition-colors uppercase text-xs font-bold tracking-widest flex items-center justify-center gap-2" data-i18n="projects.liveDemo">Live Demo <i data-lucide="external-link" class="w-4 h-4 rtl:mr-2"></i></button>
+              <div class="flex gap-2">
+                <button class="open-modal-btn flex-1 py-2 bg-cyberPurple/10 border border-cyberPurple/30 text-cyberPurple rounded-lg hover:bg-cyberPurple hover:text-white transition-all text-xs font-bold" data-i18n="projects.viewDetails">View Details</button>
+                <a href="#" target="_blank" class="p-2 bg-bgPrimary/50 border border-borderColor text-textPrimary rounded-lg hover:bg-white dark:hover:bg-white/10 transition-all flex items-center justify-center">
+                  <i data-lucide="external-link" class="w-4 h-4"></i>
+                </a>
+              </div>
             </div>
           </div>
 
           <!-- Project 3 -->
-          <div class="project-card relative w-full h-[400px] glass-panel rounded-2xl overflow-hidden cursor-pointer group transform-style-3d bg-white/50 dark:bg-black/20">
-            <div class="absolute inset-0 bg-gradient-to-br from-green-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"></div>
-            <div class="relative z-10 p-6 h-full flex flex-col justify-between">
+          <div class="project-card relative w-full h-[520px] glass-panel rounded-2xl overflow-hidden cursor-pointer group transform-style-3d bg-white/50 dark:bg-black/20 border-borderColor transition-all duration-500 hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_20px_50px_rgba(34,197,94,0.2)]"
+               data-project-id="3"
+               data-full-title="Intelligent Bookmark Manager"
+               data-full-desc="A high-performance CRUD application with local storage persistence. Features include URL validation, tag-based filtering, and a clean, accessible interface for managing digital resources."
+               data-stack="Vanilla JS, HTML5, CSS3, LocalStorage"
+               data-github="#"
+               data-live="#">
+            <div class="h-1/2 relative overflow-hidden">
+               <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&q=80&w=1200" alt="Bookmark Manager" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+               <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+            <div class="relative z-10 p-6 h-1/2 flex flex-col justify-between">
               <div>
-                <div class="flex justify-between items-start mb-4">
-                  <i data-lucide="bookmark" class="text-green-400 w-8 h-8"></i>
-                  <a href="#" class="text-textSecondary hover:text-textPrimary transition-colors"><i data-lucide="github" class="w-6 h-6"></i></a>
+                <div class="flex justify-between items-start mb-2">
+                  <h3 class="text-xl font-bold font-['Outfit'] text-textPrimary" data-i18n="projects.project3.title">Bookmark Manager</h3>
+                  <i data-lucide="bookmark" class="text-green-400 w-5 h-5"></i>
                 </div>
-                <h3 class="text-2xl font-bold font-['Outfit'] mb-2 text-textPrimary" data-i18n="projects.project3.title">Bookmark Manager</h3>
-                <p class="text-textSecondary text-sm mb-4 line-clamp-3" data-i18n="projects.project3.desc">Performant CRUD system for managing bookmarks with local storage persistence and robust data validation.</p>
-                <div class="flex flex-wrap gap-2 mt-4">
-                  <span class="text-xs font-mono text-green-400 bg-green-400/10 px-2 py-1 rounded ltr">Vanilla JS</span>
-                  <span class="text-xs font-mono text-electricBlue bg-electricBlue/10 px-2 py-1 rounded ltr">HTML/CSS</span>
+                <p class="text-textSecondary text-sm mb-4 line-clamp-2" data-i18n="projects.project3.desc">Performant CRUD system for managing bookmarks with local storage persistence and robust data validation.</p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span class="text-[10px] uppercase font-bold tracking-wider text-green-400 bg-green-400/10 px-2 py-0.5 rounded-full border border-green-400/20">Vanilla JS</span>
+                  <span class="text-[10px] uppercase font-bold tracking-wider text-electricBlue bg-electricBlue/10 px-2 py-0.5 rounded-full border border-electricBlue/20">HTML5</span>
+                  <span class="text-[10px] uppercase font-bold tracking-wider text-neonCyan bg-neonCyan/10 px-2 py-0.5 rounded-full border border-neonCyan/20">CSS3</span>
                 </div>
               </div>
-              <button class="w-full mt-4 py-2 border border-borderColor text-textPrimary rounded hover:bg-bgPrimary/10 transition-colors uppercase text-xs font-bold tracking-widest flex items-center justify-center gap-2" data-i18n="projects.liveDemo">Live Demo <i data-lucide="external-link" class="w-4 h-4 rtl:mr-2"></i></button>
+              <div class="flex gap-2">
+                <button class="open-modal-btn flex-1 py-2 bg-green-500/10 border border-green-500/30 text-green-500 rounded-lg hover:bg-green-500 hover:text-white transition-all text-xs font-bold" data-i18n="projects.viewDetails">View Details</button>
+                <a href="#" target="_blank" class="p-2 bg-bgPrimary/50 border border-borderColor text-textPrimary rounded-lg hover:bg-white dark:hover:bg-white/10 transition-all flex items-center justify-center">
+                  <i data-lucide="external-link" class="w-4 h-4"></i>
+                </a>
+              </div>
             </div>
           </div>
 
         </div>
       </section>
 
-      <!-- Experience & Education Timeline Section -->
-      <section id="timeline" class="w-full py-20 px-4 md:px-20 mx-auto max-w-5xl relative">
+      <!-- Professional Journey Timeline -->
+      <section id="timeline" class="w-full py-20 px-4 md:px-20 mx-auto max-w-6xl relative">
         <h2 class="text-4xl md:text-5xl font-['Outfit'] font-bold text-center mb-16 flex items-center justify-center gap-4 text-textPrimary">
-           <i data-lucide="graduation-cap" class="text-cyberPurple w-10 h-10"></i> <span data-i18n="timeline.title">Timeline</span>
+           <i data-lucide="history" class="text-cyberPurple w-10 h-10"></i> <span class="text-gradient" data-i18n="timeline.title">Professional Journey</span>
         </h2>
-        <div class="relative rtl:border-r-2 ltr:border-l-2 border-electricBlue ltr:ml-4 rtl:mr-4 md:ml-0 md:mx-auto lg:w-3/4">
-          <!-- Timeline Item -->
-          <div class="mb-10 ltr:ml-8 rtl:mr-8 relative">
-            <div class="absolute w-6 h-6 bg-white dark:bg-darkBg border-2 border-neonCyan rounded-full ltr:-left-[45px] rtl:-right-[45px] top-1 animate-glow-pulse flex items-center justify-center">
-              <div class="w-2 h-2 bg-neonCyan rounded-full"></div>
+        
+        <div class="relative ltr:border-l-2 rtl:border-r-2 border-electricBlue/30 ltr:ml-6 rtl:mr-6 md:mx-auto max-w-3xl">
+          
+          <!-- Item 1: Education -->
+          <div class="mb-16 ltr:pl-10 rtl:pr-10 relative">
+            <div class="absolute w-8 h-8 bg-bgPrimary border-2 border-electricBlue rounded-full ltr:-left-4 rtl:-right-4 top-0 flex items-center justify-center shadow-[0_0_15px_rgba(10,132,255,0.4)]">
+              <i data-lucide="graduation-cap" class="w-4 h-4 text-electricBlue"></i>
             </div>
-            <span class="text-sm font-mono text-electricBlue dark:text-neonCyan bg-electricBlue/10 dark:bg-neonCyan/10 px-2 py-1 rounded" data-i18n="timeline.date1">Expected Graduation 2026</span>
-            <h3 class="text-2xl font-bold mt-2 font-['Outfit'] text-textPrimary" data-i18n="timeline.degree1">B.Sc. Information Technology</h3>
-            <p class="text-textSecondary font-medium" data-i18n="timeline.uni1">Delta University of Technology</p>
-            <p class="text-textSecondary text-sm mt-3" data-i18n="timeline.desc1">Software Engineering Track focusing on advanced system architecture, databases, and algorithms.</p>
+            <div>
+              <span class="text-xs font-bold tracking-widest text-electricBlue uppercase" data-i18n="timeline.date1">2022 - Present</span>
+              <h3 class="text-2xl font-bold font-['Outfit'] text-textPrimary mt-1" data-i18n="timeline.degree1">B.Sc. in Information Technology</h3>
+              <p class="text-textSecondary font-semibold mb-4" data-i18n="timeline.uni1">Delta University of Technology</p>
+              <div class="glass-panel p-4 rounded-xl border-white/5">
+                <p class="text-textSecondary text-sm leading-relaxed" data-i18n="timeline.desc1">Focusing on Software Engineering, Data Structures, and Modern Web Architectures. Maintaining a strong academic record while building real-world applications.</p>
+              </div>
+            </div>
           </div>
+
+          <!-- Item 2: Frontend Focus -->
+          <div class="mb-16 ltr:pl-10 rtl:pr-10 relative">
+            <div class="absolute w-8 h-8 bg-bgPrimary border-2 border-cyberPurple rounded-full ltr:-left-4 rtl:-right-4 top-0 flex items-center justify-center shadow-[0_0_15px_rgba(191,90,242,0.4)]">
+              <i data-lucide="code" class="w-4 h-4 text-cyberPurple"></i>
+            </div>
+            <div>
+              <span class="text-xs font-bold tracking-widest text-cyberPurple uppercase" data-i18n="timeline.date2">2023 - 2024</span>
+              <h3 class="text-2xl font-bold font-['Outfit'] text-textPrimary mt-1" data-i18n="timeline.role2">Frontend Specialist (Self-Driven)</h3>
+              <p class="text-textSecondary font-semibold mb-4">Focus: Angular & Reactive UI</p>
+              <div class="glass-panel p-4 rounded-xl border-white/5">
+                <p class="text-textSecondary text-sm leading-relaxed" data-i18n="timeline.desc2">Developed multiple high-end projects including an E-Commerce platform and custom components. Mastered state management and performance optimization in SPA frameworks.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Item 3: Backend & Fullstack -->
+          <div class="ltr:pl-10 rtl:pr-10 relative">
+            <div class="absolute w-8 h-8 bg-bgPrimary border-2 border-neonCyan rounded-full ltr:-left-4 rtl:-right-4 top-0 flex items-center justify-center shadow-[0_0_15px_rgba(90,200,250,0.4)]">
+              <i data-lucide="server" class="w-4 h-4 text-neonCyan"></i>
+            </div>
+            <div>
+              <span class="text-xs font-bold tracking-widest text-neonCyan uppercase" data-i18n="timeline.date3">Present</span>
+              <h3 class="text-2xl font-bold font-['Outfit'] text-textPrimary mt-1" data-i18n="timeline.role3">Fullstack Evolution</h3>
+              <p class="text-textSecondary font-semibold mb-4">Focus: .NET & Advanced UI</p>
+              <div class="glass-panel p-4 rounded-xl border-white/5">
+                <p class="text-textSecondary text-sm leading-relaxed" data-i18n="timeline.desc3">Bridging the gap between beautiful frontends and robust backends. Currently exploring .NET Core and advanced system design for enterprise-level applications.</p>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
-      <!-- GitHub & Blog Sections -->
       <section id="github-stats" class="w-full py-20 px-4 md:px-20 mx-auto max-w-7xl relative">
         <h2 class="text-4xl md:text-5xl font-['Outfit'] font-bold text-center mb-16 flex items-center justify-center gap-4 text-textPrimary">
-           <i data-lucide="github" class="w-10 h-10"></i> <span data-i18n="github.title">Open Source</span>
+           <i data-lucide="github" class="w-10 h-10"></i> <span class="text-gradient" data-i18n="github.title">Open Source Analytics</span>
         </h2>
-        <div class="flex flex-col md:flex-row justify-center items-center gap-8">
-           <div class="glass-panel p-4 rounded-xl hover:scale-105 transition-transform">
-             <img src="https://github-readme-stats.vercel.app/api?username=BelalAwadallah&theme=tokyonight&hide_border=true&include_all_commits=true&count_private=true" alt="Belal GitHub Stats" class="rounded-lg w-full max-w-[450px]">
-           </div>
-           <div class="glass-panel p-4 rounded-xl hover:scale-105 transition-transform">
-             <img src="https://github-readme-streak-stats.herokuapp.com/?user=BelalAwadallah&theme=tokyonight&hide_border=true" alt="Belal GitHub Streak" class="rounded-lg w-full max-w-[450px]">
-           </div>
+        <div class="flex flex-col items-center gap-12">
+          <div class="flex flex-col md:flex-row justify-center items-center gap-8 w-full">
+             <div class="glass-panel p-4 rounded-xl hover:scale-[1.02] transition-transform w-full md:w-auto">
+               <img src="https://github-readme-stats.vercel.app/api?username=BelalAwadallah&theme=tokyonight&hide_border=true&include_all_commits=true&count_private=true" alt="Belal GitHub Stats" class="rounded-lg w-full max-w-[450px] mx-auto">
+             </div>
+             <div class="glass-panel p-4 rounded-xl hover:scale-[1.02] transition-transform w-full md:w-auto">
+               <img src="https://github-readme-streak-stats.herokuapp.com/?user=BelalAwadallah&theme=tokyonight&hide_border=true" alt="Belal GitHub Streak" class="rounded-lg w-full max-w-[450px] mx-auto">
+             </div>
+          </div>
+          <a href="https://github.com/BelalAwadallah" target="_blank" class="px-10 py-4 bg-bgPrimary border border-electricBlue/30 text-textPrimary rounded-full font-bold hover:bg-electricBlue hover:text-white transition-all flex items-center gap-3 shadow-[0_0_20px_rgba(10,132,255,0.2)] group">
+            <span data-i18n="github.viewProfile">View Full GitHub Profile</span>
+            <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+          </a>
         </div>
       </section>
 
@@ -253,44 +461,80 @@
       <!-- Contact & AI Chatbot Interaction -->
       <section id="contact" class="w-full py-20 mx-auto bg-black/5 dark:bg-black/50 border-t border-black/10 dark:border-white/5 relative flex justify-center mt-20">
         <div class="max-w-7xl w-full px-4 md:px-20 flex flex-col md:flex-row gap-12 justify-between">
-          <div class="w-full md:w-1/2">
-            <h2 class="text-4xl font-['Outfit'] font-bold mb-6 text-textPrimary" data-i18n="contact.title">Let's Connect</h2>
-            <p class="text-textSecondary mb-8 text-lg" data-i18n="contact.desc">Actively seeking freelance, internships, remote engineering roles, and startup collaborations.</p>
-            <div class="flex flex-col gap-4">
-              <a href="mailto:belalawadallah891@gmail.com" class="flex items-center gap-4 text-textSecondary hover:text-electricBlue transition-colors group">
-                <div class="w-12 h-12 rounded-full glass-panel flex items-center justify-center group-hover:bg-bgPrimary/10 ltr:mr-4 rtl:ml-4">
-                  <i data-lucide="mail" class="text-iconColor"></i>
+          <!-- Contact Info & Form -->
+          <div class="w-full md:w-3/5">
+            <h2 class="text-4xl md:text-5xl font-['Outfit'] font-bold mb-6 text-textPrimary" data-i18n="contact.title">Let's Build Something Great</h2>
+            <p class="text-textSecondary mb-10 text-lg leading-relaxed max-w-2xl" data-i18n="contact.desc">
+              Whether you have a question about a project, a freelance opportunity, or just want to say hi, my inbox is always open.
+            </p>
+            
+            <form id="contact-form" class="space-y-6 glass-panel p-8 md:p-10 border-white/5">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="flex flex-col gap-2">
+                  <label for="user_name" class="text-sm font-bold text-textPrimary/70 uppercase tracking-wider">Full Name</label>
+                  <input type="text" id="user_name" name="name" required class="bg-bgPrimary/50 border border-borderColor rounded-xl px-4 py-3 text-textPrimary focus:outline-none focus:border-electricBlue transition-all" placeholder="John Doe">
                 </div>
-                <span class="text-xl ltr">belalawadallah891@gmail.com</span>
-              </a>
-              <a href="https://www.linkedin.com/in/belal-awadallah-3213b1288/" target="_blank" class="flex items-center gap-4 text-textSecondary hover:text-electricBlue transition-colors group">
-                <div class="w-12 h-12 rounded-full glass-panel flex items-center justify-center group-hover:bg-bgPrimary/10 ltr:mr-4 rtl:ml-4">
-                  <i data-lucide="linkedin" class="text-iconColor"></i>
+                <div class="flex flex-col gap-2">
+                  <label for="user_email" class="text-sm font-bold text-textPrimary/70 uppercase tracking-wider">Email Address</label>
+                  <input type="email" id="user_email" name="email" required class="bg-bgPrimary/50 border border-borderColor rounded-xl px-4 py-3 text-textPrimary focus:outline-none focus:border-electricBlue transition-all" placeholder="name@example.com">
                 </div>
-                <span class="text-xl ltr">Belal Awadallah</span>
-              </a>
-            </div>
-          </div>
-          <!-- Chatbot UI Placeholder -->
-          <div class="w-full md:w-1/2 glass-panel p-6 flex flex-col h-[400px]">
-            <div class="flex items-center gap-3 border-b border-borderColor pb-4 mb-4">
-              <div class="w-10 h-10 rounded-full bg-electricBlue/10 flex items-center justify-center text-electricBlue font-bold ltr:mr-2 rtl:ml-4">AI</div>
-              <div>
-                <h4 class="text-textPrimary font-bold" data-i18n="contact.chatTitle">Belal Bot</h4>
-                <p class="text-xs text-green-600 dark:text-green-400 flex items-center gap-1">
-                  <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse rtl:ml-1 ltr:mr-1"></span>
-                  <span data-i18n="contact.chatStatus">Online</span>
-                </p>
               </div>
-            </div>
-            <div class="flex-1 overflow-y-auto mb-4 space-y-4 text-left ltr" dir="ltr" id="chat-messages">
-               <div class="bg-bgPrimary/10 rounded-2xl rounded-tl-sm p-3 inline-block max-w-[80%] text-sm text-textPrimary shadow-sm" data-i18n="contact.chatWelcome">
-                 Hello! I'm an AI assistant. Feel free to ask me anything about Belal's skills or experience.
+              <div class="flex flex-col gap-2">
+                <label for="user_subject" class="text-sm font-bold text-textPrimary/70 uppercase tracking-wider">Subject</label>
+                <input type="text" id="user_subject" name="subject" required class="bg-bgPrimary/50 border border-borderColor rounded-xl px-4 py-3 text-textPrimary focus:outline-none focus:border-electricBlue transition-all" placeholder="Project Inquiry">
+              </div>
+              <div class="flex flex-col gap-2">
+                <label for="user_message" class="text-sm font-bold text-textPrimary/70 uppercase tracking-wider">Message</label>
+                <textarea id="user_message" name="message" rows="5" required class="bg-bgPrimary/50 border border-borderColor rounded-xl px-4 py-3 text-textPrimary focus:outline-none focus:border-electricBlue transition-all resize-none" placeholder="Tell me about your vision..."></textarea>
+              </div>
+              <button type="submit" class="w-full py-4 bg-electricBlue text-white rounded-xl font-bold hover:bg-neonCyan transition-all shadow-lg flex items-center justify-center gap-3 group">
+                <span data-i18n="contact.sendButton">Send Message</span>
+                <i data-lucide="send" class="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+              </button>
+            </form>
+          </div>
+
+          <!-- Quick Connect & AI -->
+          <div class="w-full md:w-2/5 flex flex-col gap-8">
+            <div class="glass-panel p-8 border-white/5">
+               <h3 class="text-xl font-bold font-['Outfit'] mb-6 text-textPrimary" data-i18n="contact.quickConnect">Quick Connect</h3>
+               <div class="space-y-6">
+                <a href="mailto:belalawadallah891@gmail.com" class="flex items-center gap-4 text-textSecondary hover:text-electricBlue transition-colors group">
+                  <div class="w-10 h-10 rounded-full glass-panel flex items-center justify-center group-hover:bg-electricBlue/10 transition-all">
+                    <i data-lucide="mail" class="w-5 h-5"></i>
+                  </div>
+                  <span class="text-md font-medium ltr">belalawadallah891@gmail.com</span>
+                </a>
+                <a href="https://www.linkedin.com/in/belal-awadallah-3213b1288/" target="_blank" class="flex items-center gap-4 text-textSecondary hover:text-electricBlue transition-colors group">
+                  <div class="w-10 h-10 rounded-full glass-panel flex items-center justify-center group-hover:bg-electricBlue/10 transition-all">
+                    <i data-lucide="linkedin" class="w-5 h-5"></i>
+                  </div>
+                  <span class="text-md font-medium ltr">LinkedIn Profile</span>
+                </a>
                </div>
             </div>
-            <div class="flex gap-2 text-left ltr" dir="ltr">
-              <input type="text" id="chat-input" class="flex-1 bg-bgPrimary/50 border border-borderColor rounded-full px-4 py-2 text-sm text-textPrimary focus:outline-none focus:border-electricBlue transition-colors" data-i18n-placeholder="contact.chatPlaceholder" placeholder="Ask a question...">
-              <button id="chat-send" class="w-10 h-10 rounded-full bg-electricBlue text-white flex items-center justify-center hover:bg-neonCyan transition-colors"><i data-lucide="send" class="w-4 h-4"></i></button>
+
+            <!-- AI Companion -->
+            <div class="glass-panel p-6 flex flex-col h-[350px] border-white/5">
+              <div class="flex items-center gap-3 border-b border-borderColor pb-4 mb-4">
+                <div class="w-10 h-10 rounded-full bg-electricBlue/10 flex items-center justify-center text-electricBlue font-bold">AI</div>
+                <div>
+                  <h4 class="text-textPrimary font-bold" data-i18n="contact.chatTitle">Assistant Bot</h4>
+                  <p class="text-xs text-green-500 flex items-center gap-1">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    <span data-i18n="contact.chatStatus">Online</span>
+                  </p>
+                </div>
+              </div>
+              <div class="flex-1 overflow-y-auto mb-4 space-y-4 text-left ltr" dir="ltr" id="chat-messages">
+                 <div class="bg-bgPrimary/10 rounded-2xl rounded-tl-sm p-3 inline-block max-w-[80%] text-sm text-textPrimary shadow-sm" data-i18n="contact.chatWelcome">
+                   Hi! While you're here, feel free to ask me anything about Belal's technical stack or projects.
+                 </div>
+              </div>
+              <div class="flex gap-2 text-left ltr" dir="ltr">
+                <input type="text" id="chat-input" class="flex-1 bg-bgPrimary/50 border border-borderColor rounded-full px-4 py-2 text-sm text-textPrimary focus:outline-none focus:border-electricBlue transition-colors" data-i18n-placeholder="contact.chatPlaceholder" placeholder="Ask anything...">
+                <button id="chat-send" class="w-10 h-10 rounded-full bg-electricBlue text-white flex items-center justify-center hover:bg-neonCyan transition-colors"><i data-lucide="send" class="w-4 h-4"></i></button>
+              </div>
             </div>
           </div>
         </div>
@@ -300,7 +544,41 @@
       <footer class="w-full py-6 text-center text-xs text-gray-600 bg-[#f0f0f0] dark:bg-black">
         <p data-i18n="footer.text">Designed and developed by Belal Awadallah.</p>
         <p class="mt-1 flex items-center justify-center gap-1"><span data-i18n="footer.built">Built with</span> <i data-lucide="cpu" class="w-3 h-3 text-cyberPurple rtl:mr-1"></i> <span class="mx-1">and</span> <i data-lucide="zap" class="w-3 h-3 text-yellow-500"></i></p>
-      </footer>    </main>
+      </footer>
+    </main>
+
+    <!-- Case Study Modal -->
+    <div id="project-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center px-4">
+      <div class="absolute inset-0 modal-overlay" id="modal-close-overlay"></div>
+      <div class="relative w-full max-w-2xl glass-panel p-8 md:p-12 overflow-y-auto max-h-[90vh] translate-y-10 opacity-0 transition-all duration-500" id="modal-content">
+        <button id="modal-close-btn" class="absolute top-6 right-6 p-2 text-textPrimary hover:bg-white/10 rounded-full transition-colors">
+          <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+        
+        <div class="flex flex-col gap-6">
+          <div id="modal-image-container" class="w-full h-48 md:h-64 rounded-xl overflow-hidden mb-4">
+             <img src="" alt="" id="modal-image" class="w-full h-full object-cover">
+          </div>
+          <div>
+            <h2 id="modal-title" class="text-3xl md:text-5xl font-['Outfit'] font-bold text-textPrimary mb-4">Project Title</h2>
+            <div id="modal-stack" class="flex flex-wrap gap-2 mb-6">
+              <!-- Dynamically injected -->
+            </div>
+            <p id="modal-desc" class="text-textSecondary text-lg leading-relaxed mb-8">
+              Detailed project description goes here...
+            </p>
+            <div class="flex gap-4">
+              <a href="#" id="modal-github" target="_blank" class="flex-1 py-4 bg-bgPrimary border border-borderColor text-textPrimary rounded-xl hover:bg-white dark:hover:bg-white/10 transition-all flex items-center justify-center gap-3 font-bold">
+                <i data-lucide="github" class="w-5 h-5"></i> GitHub Repository
+              </a>
+              <a href="#" id="modal-live" target="_blank" class="flex-1 py-4 bg-electricBlue text-white rounded-xl hover:bg-neonCyan transition-all flex items-center justify-center gap-3 font-bold shadow-lg">
+                <span data-i18n="projects.liveDemo">Live Demo</span> <i data-lucide="external-link" class="w-5 h-5"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Custom Cursor -->
     <div id="custom-cursor" class="fixed w-4 h-4 rounded-full border-2 border-electricBlue pointer-events-none z-50 transition-transform duration-100 ease-out flex items-center justify-center transform -translate-x-1/2 -translate-y-1/2 mix-blend-difference hidden md:flex">
